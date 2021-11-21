@@ -5,11 +5,11 @@ services:
     build:
       context: .
       dockerfile: Dockerfile.dev
-    command: yarn serve -h 0.0.0.0
+    command: yarn start:dev
     volumes:
-      - ./services/app/:/usr/src/app/
+      - ./:/usr/src/app/
     ports:
-      - 5000:5000
+      - 7000:7000
     env_file:
       - ./.env
     depends_on:
@@ -20,7 +20,7 @@ services:
       context: .
       dockerfile: Dockerfile
     ports:
-      - 7000:7000
+      - ${PORT}:7000
     env_file:
       - ./.env
     depends_on:

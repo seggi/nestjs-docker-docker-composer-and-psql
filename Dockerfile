@@ -12,7 +12,7 @@ COPY . .
 RUN yarn build
 
 # The instructions for second stage
-FROM node:12.19.0-alpine3.9
+FROM node:12.19.0-alpine3.9 AS final
 
 ENV NODE_ENV=production
 RUN yarn install --production=true
