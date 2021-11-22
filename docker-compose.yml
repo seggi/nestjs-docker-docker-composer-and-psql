@@ -1,17 +1,30 @@
 version: '3.8'
 
 services:
+  sqldb:
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    command: sh -c "yarn db:create; yarn db:migrate; yarn db:seed"
+    volumes:
+      - ./:/usr/src/app/
+    ports:
+      - ${PORT}:7000
+    env_file:
+      - .env
+    depends_on:
+      - db
   dev:
     build:
       context: .
       dockerfile: Dockerfile.dev
-    command: yarn start:dev
+    command: sh -c "yarn db:migrate; yarn start:dev"
     volumes:
       - ./:/usr/src/app/
     ports:
-      - 7000:7000
+      - ${PORT}:7000
     env_file:
-      - ./.env
+      - .env
     depends_on:
       - db
 
