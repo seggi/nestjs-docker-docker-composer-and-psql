@@ -16,7 +16,9 @@
     "db:drop:test": "cross-env NODE_ENV=test yarn db:drop",
     "db:migrate": "sequelize db:migrate",
     "db:migrate:test": "cross-env NODE_ENV=test yarn db:migrate",
-    "db:migrate:reset": "sequelize db:migrate:undo:all",
+    "migrate:reset": "npx sequelize-cli db:migrate:undo:all && npm run migrate",
+    "pretest": "cross-env NODE_ENV=test yarn migrate:reset",
+    "coverage": "npm run pretest && jest --coverage && cat ./coverage/lcov.info | coveralls",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "nanKim",
