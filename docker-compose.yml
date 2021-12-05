@@ -5,7 +5,7 @@ services:
     build:
       context: .
       dockerfile: Dockerfile.dev
-    command: sh -c "yarn db:create; yarn db:migrate; yarn db:seed"
+    command: sh -c "yarn db:create;"
     volumes:
       - ./:/usr/src/app/
     ports:

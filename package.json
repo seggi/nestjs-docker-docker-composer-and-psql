@@ -4,7 +4,8 @@
   "description": "\"Services offer app\"",
   "main": "dist/index.js",
   "scripts": {
-    "start:dev": "nodemon",
+    "start-server": "tsc && node dist/index.js",
+    "start:dev": "nodemon -e ts -w ./ -x npm run start-server",
     "build": "rimraf build/ && tsc",
     "preserve": "yarn build",
     "serve": "cross-env NODE_ENV=development concurrently \"tsc --watch\" \"nodemon -q dist/index.js\"",
