@@ -8,5 +8,4 @@ const sequelize = config.url
   : new Sequelize(config.database, config.username, config.password, config);
 
 
-
 export { Sequelize, sequelize };
