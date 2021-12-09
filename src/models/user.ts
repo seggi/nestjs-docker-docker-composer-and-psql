@@ -1,5 +1,5 @@
 import { DataTypes, Model, Optional, Sequelize } from 'sequelize';
-import { sequelize } from ".";
+import { sequelize } from "./";
 import UserProfile from './user.profile';
 
 export interface UserInterface {
@@ -87,7 +87,7 @@ User.init(
 
   {
     tableName: "user",
-    sequelize: sequelize
+    sequelize
   }
 
 );
@@ -97,5 +97,6 @@ User.hasMany(UserProfile, {
   foreignKey: 'userId',
   as: 'userId'
 })
+
 
 export default User;
