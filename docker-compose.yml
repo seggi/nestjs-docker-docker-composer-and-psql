@@ -5,7 +5,7 @@ services:
     build:
       context: .
       dockerfile: Dockerfile.dev
-    command: sh -c "yarn db:create;"
+    # command: sh -c "yarn db:migrate;"
     volumes:
       - ./:/usr/src/app/
     ports:
@@ -18,7 +18,7 @@ services:
     build:
       context: .
       dockerfile: Dockerfile.dev
-    command: sh -c "yarn db:migrate; yarn start:dev"
+    command: sh -c "yarn start:dev"
     volumes:
       - ./:/usr/src/app/
     ports:
@@ -47,6 +47,8 @@ services:
       - POSTGRES_USER=${POSTGRES_USER}
       - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
       - POSTGRES_DB=${POSTGRES_DB}
+    ports:
+      - "5432:5432"
 
 volumes:
   postgres_data: null

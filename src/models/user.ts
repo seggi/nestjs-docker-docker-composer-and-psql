@@ -3,7 +3,7 @@ import { sequelize } from ".";
 import UserProfile from './user.profile';
 
 export interface UserInterface {
-  id: string,
+  id?: string,
   firstname: string;
   lastname: string;
   birthdate: number;

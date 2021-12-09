@@ -3,7 +3,7 @@ import { sequelize } from '.';
 import User from './user';
 
 interface UserProfileInterface {
-    id: string;
+    id?: string;
     userId: string;
     serviceId: string;
     picture: string;
