@@ -1,0 +1,26 @@
+# Build stage 1.
+# The instructions for the development stage
+FROM node:12.19.0-alpine3.9 as builder
+
+ENV NODE_ENV=development
+
+WORKDIR /usr/src/app
+COPY . .
+
+RUN npm install glob rimraf
+RUN npm run install 
+RUN npm run build
+
+FROM node:12.19.0-alpine3.9
+WORKDIR /usr/src/app
+COPY package*.json ./
+RUN npm install --production
+
+COPY --from=builder /usr/src/app/dist ./dist
+
+
+COPY .env .
+
+EXPOSE 9000
+
+CMD node dist/src/index.js
