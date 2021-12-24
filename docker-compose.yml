@@ -2,6 +2,7 @@ version: '3.8'
 
 services:
   dev:
+<<<<<<< HEAD
     container_name: nestjs_api_dev
     image: nestjs-api-dev:1.0.0
     build:
@@ -18,10 +19,29 @@ services:
       - .:/usr/src/app
       - /usr/src/app/node_modules
     restart: unless-stopped
+=======
+    container_name: ${CONTAINER_NAME}
+    image: ${REGISTRY_NAME}/${CONTAINER_NAME}:${CONTAINER_VERSION}
+    build:
+      context: .
+      target: development
+      dockerfile: Dockerfile
+    command: sh -c "yarn start:debug"
+    volumes:
+      - ./:/usr/src/app/
+      - /usr/src/app/node_modules
+    ports:
+      - ${PORT}:3000
+      - 9000:9000
+    restart: unless-stopped
+    env_file:
+      - .env
+>>>>>>> bd8058b (config dockerfile && docker-compose)
     depends_on:
       - db
 
   prod:
+<<<<<<< HEAD
     container_name: nestjs_api_prod
     image: nestjs-api-prod:1.0.0
     build:
@@ -40,6 +60,24 @@ services:
     restart: unless-stopped
     depends_on:
       - db
+=======
+    container_name: ${CONTAINER_NAME}
+    image: ${REGISTRY_NAME}/${CONTAINER_NAME}:${CONTAINER_VERSION}
+    build:
+      context: .
+      target: production
+      dockerfile: Dockerfile
+    command: npm run start:prod
+    ports:
+      - ${PORT}:3000
+      - 9000:9000
+    volumes:
+      - ./:/usr/src/app/
+      - /usr/src/app/node_modules
+    env_file:
+      - ./.env
+    restart: unless-stopped
+>>>>>>> bd8058b (config dockerfile && docker-compose)
 
   db:
     image: postgres:13-alpine
