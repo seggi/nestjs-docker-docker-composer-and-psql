@@ -2,44 +2,43 @@ version: '3.8'
 
 services:
   dev:
-    container_name: nestjs_api_dev
-    image: nestjs-api-dev:1.0.0
+    container_name: ${CONTAINER_NAME}
+    image: ${REGISTRY_NAME}/${CONTAINER_NAME}:${CONTAINER_VERSION}
     build:
       context: .
       target: development
-      dockerfile: ./Dockerfile
-    command: npm run start:debug
-    ports:
-      - 3000:3000
-      - 9229:9229
-    networks:
-      - nesjs-network
+      dockerfile: Dockerfile
+    command: sh -c "npm run typeorm:migration:generate -- commingle_init; npm run
+      typeorm migration:run; npm run start:dev;"
     volumes:
-      - .:/usr/src/app
+      - ./:/usr/src/app/
       - /usr/src/app/node_modules
+    ports:
+      - ${PORT}:3000
+      - 9223:9223
     restart: unless-stopped
+    env_file:
+      - .env
     depends_on:
       - db
 
   prod:
-    container_name: nestjs_api_prod
-    image: nestjs-api-prod:1.0.0
+    container_name: ${CONTAINER_NAME}
+    image: ${REGISTRY_NAME}/${CONTAINER_NAME}:${CONTAINER_VERSION}
     build:
       context: .
       target: production
-      dockerfile: ./Dockerfile
+      dockerfile: Dockerfile
     command: npm run start:prod
     ports:
-      - 3000:3000
-      - 9229:9229
-    networks:
-      - nesjs-network
+      - ${PORT}:3000
+      - 9223:9223
     volumes:
-      - .:/usr/src/app
+      - ./:/usr/src/app/
       - /usr/src/app/node_modules
+    env_file:
+      - ./.env
     restart: unless-stopped
-    depends_on:
-      - db
 
   db:
     image: postgres:13-alpine
@@ -49,8 +48,6 @@ services:
       - POSTGRES_USER=${POSTGRES_USER}
       - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
       - POSTGRES_DB=${POSTGRES_DB}
-    ports:
-      - "5432:5432"
 
 volumes:
   postgres_data: null
