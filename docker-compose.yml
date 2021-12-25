@@ -8,7 +8,7 @@ services:
       context: .
       target: development
       dockerfile: Dockerfile
-    command: sh -c "yarn start:debug"
+    command: sh -c "npm run typeorm:migration:generate -n; npm run start:dev;"
     volumes:
       - ./:/usr/src/app/
       - /usr/src/app/node_modules

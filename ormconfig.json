@@ -1,0 +1,19 @@
+{
+  "type": "postgres",
+  "host": "commingle-backend_db_1",
+  "port": 5432,
+  "username": "nankim",
+  "password": "Password@123",
+  "database": "commingle",
+  "entities": [
+    "**/*.entity{.ts, .js"
+  ],
+  "migrationsTableName": "migration",
+  "migrations": [
+    "src/migration/*.ts"
+  ],
+  "cli": {
+    "migrationsDir": "src/migration"
+  },
+  "ssl": false
+}
