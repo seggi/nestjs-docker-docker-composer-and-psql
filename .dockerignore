@@ -1,0 +1,11 @@
+node_modules
+build
+.dockerignore
+Dockerfile
+Dockerfile.dev
+.github
+.vscode
+Dockerfile.dev
+docker-compose.yml
+.env 
+ormconfig.json
