@@ -1,4 +1,4 @@
-import { Entity, Column } from "typeorm";
+import { Entity, Column } from 'typeorm';
 import { UsersEntity } from "./users.entity";
 
 @Entity({ name: 'user_profile' })
@@ -10,6 +10,6 @@ export class UserProfileEntity extends UsersEntity {
     image: string;
 
     @Column({ type: "varchar" })
-    profession: string;
+    professions: string;
 
 }

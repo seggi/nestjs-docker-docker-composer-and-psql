@@ -1,4 +1,5 @@
 import { TypeOrmModuleOptions } from "@nestjs/typeorm";
+import { join } from "path";
 
 require('dotenv').config();
 
@@ -7,6 +8,7 @@ class ConfigService {
 
     private getValue(key: string, throwOnMissing = true): string {
         const value = this.env[key];
+
         if (!value && throwOnMissing) {
             throw new Error(`config error -missing env.${key}`);
         }
@@ -36,14 +38,14 @@ class ConfigService {
             password: this.getValue('POSTGRES_PASSWORD'),
             database: this.getValue('POSTGRES_DB'),
 
-            entities: ['**/*.entity{.ts, .js'],
+            entities: [join(__dirname, 'dist/**/*.entity{.js, .ts}')],
 
-            migrationsTableName: 'migration',
+            migrationsTableName: 'migrations',
 
-            migrations: ['src/migration/*.ts'],
+            migrations: [join(__dirname, 'src/migrations/*.ts')],
 
             cli: {
-                migrationsDir: 'src/migration',
+                migrationsDir: 'src/migrations',
             },
 
             ssl: this.isProduction()

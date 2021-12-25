@@ -6,14 +6,14 @@
   "password": "Password@123",
   "database": "commingle",
   "entities": [
-    "**/*.entity{.ts, .js"
+    "**/*.entity{.ts, .js}"
   ],
-  "migrationsTableName": "migration",
+  "migrationsTableName": "migrations",
   "migrations": [
-    "src/migration/*.ts"
+    "src/migrations/*.ts"
   ],
   "cli": {
-    "migrationsDir": "src/migration"
+    "migrationsDir": "src/migrations"
   },
   "ssl": false
 }

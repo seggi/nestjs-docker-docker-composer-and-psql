@@ -8,7 +8,8 @@ services:
       context: .
       target: development
       dockerfile: Dockerfile
-    command: sh -c "npm run typeorm:migration:generate -n; npm run start:dev;"
+    command: sh -c "npm run typeorm:migration:generate -- commingle_init; npm run
+      typeorm migration:run; npm run start:dev;"
     volumes:
       - ./:/usr/src/app/
       - /usr/src/app/node_modules
@@ -47,8 +48,6 @@ services:
       - POSTGRES_USER=${POSTGRES_USER}
       - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
       - POSTGRES_DB=${POSTGRES_DB}
-    ports:
-      - "5432:5432"
 
 volumes:
   postgres_data: null

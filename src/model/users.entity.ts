@@ -11,7 +11,7 @@ export abstract class UsersEntity {
     last_name: string;
 
     @Column({ type: 'varchar', length: 10 })
-    sex: string;
+    gender: string;
 
     @Column({ type: 'varchar', length: 300 })
     email: string;
