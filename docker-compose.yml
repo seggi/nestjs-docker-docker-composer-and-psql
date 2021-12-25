@@ -14,7 +14,7 @@ services:
       - /usr/src/app/node_modules
     ports:
       - ${PORT}:3000
-      - 9000:9000
+      - 9223:9223
     restart: unless-stopped
     env_file:
       - .env
@@ -31,7 +31,7 @@ services:
     command: npm run start:prod
     ports:
       - ${PORT}:3000
-      - 9000:9000
+      - 9223:9223
     volumes:
       - ./:/usr/src/app/
       - /usr/src/app/node_modules
