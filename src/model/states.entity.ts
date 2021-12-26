@@ -1,4 +1,6 @@
-import { Column, CreateDateColumn, DeleteDateColumn, Entity, OneToMany, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
+import { Column, CreateDateColumn, DeleteDateColumn, Entity, ManyToOne, OneToMany, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
+import { Cities } from "./cities.entity";
+import { Countries } from "./countries.entity";
 import { User } from "./user.entity";
 
 @Entity()
@@ -11,6 +13,12 @@ export class States {
 
     @OneToMany(() => User, (user: User) => user.state)
     public user: User[];
+
+    @ManyToOne(() => Countries, (country: Countries) => country.state)
+    public country: States[] | null;
+
+    @OneToMany(() => Cities, (city: Cities) => city.state)
+    public city: Cities[];
 
     @UpdateDateColumn({ type: 'timestamptz', default: () => 'CURRENT_TIMESTAMP' })
     public updateDateTime: Date

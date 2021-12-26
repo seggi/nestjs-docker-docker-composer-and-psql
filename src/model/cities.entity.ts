@@ -14,8 +14,7 @@ export class Cities {
     public user: User[];
 
     @ManyToOne(() => States, (state: States) => state.city)
-    @Column({ nullable: true })
-    public state: States[];
+    public state: States[] | null;
 
     @UpdateDateColumn({ type: 'timestamptz', default: () => 'CURRENT_TIMESTAMP' })
     public updateDateTime: Date

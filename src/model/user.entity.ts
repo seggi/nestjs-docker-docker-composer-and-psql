@@ -1,4 +1,4 @@
-import { PrimaryGeneratedColumn, Column, UpdateDateColumn, CreateDateColumn, Entity, OneToMany, OneToOne, ManyToOne, DeleteDateColumn } from "typeorm";
+import { PrimaryGeneratedColumn, Column, UpdateDateColumn, CreateDateColumn, Entity, OneToMany, OneToOne, ManyToOne, DeleteDateColumn, JoinColumn } from "typeorm";
 import { Cities } from "./cities.entity";
 import { Countries } from "./countries.entity";
 import { Languages } from "./languages.entity";
@@ -38,16 +38,13 @@ export class User {
     public language: Languages;
 
     @ManyToOne(() => Countries, (country: Countries) => country.user)
-    @Column({ nullable: true })
-    public country: Countries[];
+    public country: Countries[] | null;
 
-    @ManyToOne(() => Countries, (city: Countries) => city.user)
-    @Column({ nullable: true })
-    public city: Cities[];
+    @ManyToOne(() => Cities, (city: Cities) => city.user)
+    public city: Cities[] | null;
 
-    @ManyToOne(() => States, (country: States) => country.user)
-    @Column({ nullable: true })
-    public state: States[];
+    @ManyToOne(() => States, (state: States) => state.user)
+    public state: States[] | null;
 
     @Column({ nullable: false })
     public username: string;
