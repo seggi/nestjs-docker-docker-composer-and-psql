@@ -58,8 +58,8 @@ export class User {
     @OneToMany(() => UserProfile, (userProfile: UserProfile) => userProfile.user)
     public userProfile: UserProfile[];
 
-    @CreateDateColumn({ type: 'timestamptz', default: () => 'CURRENT_TIMESTAMP' })
-    public conformed_on: Date;
+    @Column({ type: 'timestamptz', default: () => 'CURRENT_TIMESTAMP' })
+    public conformedOn: Date;
 
     @UpdateDateColumn({ type: 'timestamptz', default: () => 'CURRENT_TIMESTAMP' })
     public updateDateTime: Date
