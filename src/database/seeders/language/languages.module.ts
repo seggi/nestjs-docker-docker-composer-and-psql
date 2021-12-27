@@ -4,14 +4,14 @@
  */
 
 import { Module } from "@nestjs/common";
-import { TypeOrmModule } from "@nestjs/typeorm";
+import { TypeOrmModule } from '@nestjs/typeorm';
 import { Languages } from "src/model/languages.entity";
 import { LanguageSeederService } from "./languages.service";
 
 @Module({
     imports: [TypeOrmModule.forFeature([Languages])],
     providers: [LanguageSeederService],
-    exports: [LanguageSeederService],
+    exports: [TypeOrmModule, LanguageSeederService],
 })
 
-export class LanguageSeederModule { }
+export class LanguageSeederModule { };
