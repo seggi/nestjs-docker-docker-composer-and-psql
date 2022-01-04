@@ -1,9 +1,9 @@
-import { ILanguage } from "src/database/intefaces/language.interface";
+
 import { Column, CreateDateColumn, DeleteDateColumn, Entity, OneToMany, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
 import { User } from "./user.entity";
 
 @Entity()
-export class Languages implements ILanguage {
+export class Languages {
     @PrimaryGeneratedColumn()
     id: number;
 
