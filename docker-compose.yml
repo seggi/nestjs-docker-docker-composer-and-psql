@@ -1,6 +1,7 @@
 version: '3.8'
 
 services:
+
   dev:
     container_name: ${CONTAINER_NAME}
     image: ${REGISTRY_NAME}/${CONTAINER_NAME}:${CONTAINER_VERSION}
@@ -48,6 +49,17 @@ services:
       - POSTGRES_USER=${POSTGRES_USER}
       - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
       - POSTGRES_DB=${POSTGRES_DB}
+
+  db_seed:
+    container_name: ${CONTAINER_NAME}
+    image: ${REGISTRY_NAME}/${CONTAINER_NAME}:${CONTAINER_VERSION}
+    build:
+      context: .
+      target: development
+      dockerfile: Dockerfile
+    command: sh -c "npm run seed:run;"
+    depends_on:
+      - db
 
 volumes:
   postgres_data: null
