@@ -9,7 +9,7 @@ services:
       target: development
       dockerfile: Dockerfile
     command: sh -c "npm run typeorm:migration:generate -- commingle_init; npm run
-      typeorm migration:run; npm run seed; npm run start:dev;"
+      typeorm migration:run; npm run start:dev;"
     volumes:
       - ./:/usr/src/app/
       - /usr/src/app/node_modules
