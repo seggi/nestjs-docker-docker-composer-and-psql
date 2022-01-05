@@ -1,7 +1,7 @@
 import {MigrationInterface, QueryRunner} from "typeorm";
 
-export class commingleInit1641333798297 implements MigrationInterface {
-    name = 'commingleInit1641333798297'
+export class commingleInit1641345922433 implements MigrationInterface {
+    name = 'commingleInit1641345922433'
 
     public async up(queryRunner: QueryRunner): Promise<void> {
         await queryRunner.query(`CREATE TABLE "languages" ("id" SERIAL NOT NULL, "name" character varying NOT NULL, "updateDateTime" TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT now(), "createDateTime" TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT now(), "deleteDateTime" TIMESTAMP WITH TIME ZONE DEFAULT now(), CONSTRAINT "PK_b517f827ca496b29f4d549c631d" PRIMARY KEY ("id"))`);
