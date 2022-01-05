@@ -58,14 +58,14 @@ export class User {
     @OneToMany(() => UserProfile, (userProfile: UserProfile) => userProfile.user)
     public userProfile: UserProfile[];
 
-    @Column({ type: 'timestamptz', default: () => 'CURRENT_TIMESTAMP' })
-    public conformedOn: Date;
+    @Column({ default: false })
+    public isEmailConfirmed: boolean;
 
     @UpdateDateColumn({ type: 'timestamptz', default: () => 'CURRENT_TIMESTAMP' })
     public updateDateTime: Date
 
     @CreateDateColumn({ type: 'timestamptz', default: () => 'CURRENT_TIMESTAMP' })
-    public createDateTime: Date;
+    public createDateTime: Date; 1
 
     @DeleteDateColumn({ type: 'timestamptz', default: () => 'CURRENT_TIMESTAMP' })
     public deleteDateTime: Date;
