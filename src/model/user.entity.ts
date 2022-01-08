@@ -1,12 +1,13 @@
-import { PrimaryGeneratedColumn, Column, UpdateDateColumn, CreateDateColumn, Entity, OneToMany, OneToOne, ManyToOne, DeleteDateColumn, JoinColumn } from "typeorm";
+import { PrimaryGeneratedColumn, Column, UpdateDateColumn, CreateDateColumn, Entity, OneToMany, OneToOne, ManyToOne, DeleteDateColumn, JoinColumn, BeforeInsert, BaseEntity } from "typeorm";
 import { Cities } from "./cities.entity";
 import { Countries } from "./countries.entity";
 import { Languages } from "./languages.entity";
 import { States } from "./states.entity";
 import { UserProfile } from "./user_profile.entity";
+import * as bcrypt from 'bcrypt';
 
 @Entity({ name: "User" })
-export class User {
+export class User extends BaseEntity {
     @PrimaryGeneratedColumn('uuid')
     public id: number;
 
@@ -69,6 +70,16 @@ export class User {
 
     @DeleteDateColumn({ type: 'timestamptz', default: () => 'CURRENT_TIMESTAMP' })
     public deleteDateTime: Date;
+
+
+    @BeforeInsert()
+    async hashPassword() {
+        this.password = await bcrypt.hash(this.password, 8)
+    }
+
+    async validatePassword(password: string): Promise<boolean> {
+        return bcrypt.compare(password, this.password)
+    }
 
 
 }

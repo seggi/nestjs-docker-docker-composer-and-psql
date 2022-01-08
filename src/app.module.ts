@@ -3,14 +3,19 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { configService } from './config/config.service';
-import { AuthModule } from './auth/auth.module';
+import { ConfigModule } from '@nestjs/config';
 import { UsersModule } from './users/users.module';
+import { User } from './model/user.entity';
 
+const entities = [User];
 @Module({
   imports: [
     TypeOrmModule.forRoot(configService.getTypeOrmConfig()),
-    AuthModule,
-    UsersModule
+    ConfigModule.forRoot({
+      isGlobal: true,
+    }),
+    UsersModule,
+
   ],
   controllers: [AppController],
   providers: [AppService],
